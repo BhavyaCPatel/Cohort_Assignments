@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://bhavyaaes:bcp1403@cluster1.5wc8yob.mongodb.net/course?retryWrites=true&w=majority&appName=Cluster1');
-
+mongoose.connect(process.env.MONGODB_URI)
+.then(
+    console.log('MongoDb connected successfully')
+);
 // Define schemas
 const AdminSchema = new mongoose.Schema({
     // Schema definition here

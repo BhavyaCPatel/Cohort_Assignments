@@ -8,6 +8,7 @@ const userRouter = require("./routes/user");
 app.use(bodyParser.json());
 app.use("/admin", adminRouter)
 app.use("/user", userRouter)
+require('dotenv').config();
 
 const PORT = 3000;
 app.listen(PORT, () => {

@@ -4,6 +4,7 @@ const { Admin, Course } = require("../db");
 const router = Router();
 const jwt = require('jsonwebtoken');
 const jwtPassword = 'secret';
+const bcrypt = require("bcryptjs")
 
 // Admin Routes
 router.post('/signup', async (req, res) => {
@@ -11,11 +12,14 @@ router.post('/signup', async (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
+    const hashedPassword = await bcrypt.hash(password, 10)
+
     await Admin.create({
-        username: username,
-        password: password,
+        username: username, 
+        password: hashedPassword,
     })
-    res.json({
+
+    res.json({ 
         message: 'Admin created successfully'
     })
 });
@@ -25,12 +29,7 @@ router.post('/signin', async (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const response = await Admin.create({
-        username: username,
-        password: password,
-    })
-
-    if (response) {
+    if (username && password) {
         const signature = jwt.sign({
             username
         }, jwtPassword);
