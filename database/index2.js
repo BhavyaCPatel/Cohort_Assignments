@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 async function main() {
     try {
-        await mongoose.connect("mongodb+srv://bhavyaaes:bcp1403@cluster1.5wc8yob.mongodb.net/users?retryWrites=true&w=majority&appName=Cluster1");
+        await mongoose.connect(process.env.MONGODB_URI);
         console.log("Connected to MongoDB");
 
         const User = mongoose.model("User", {
