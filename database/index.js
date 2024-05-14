@@ -3,9 +3,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const jwtPassword = "123456";
 
-mongoose.connect(
-"mongodb+srv://bhavyaaes:bcp1403@cluster1.5wc8yob.mongodb.net/users?retryWrites=true&w=majority&appName=Cluster1",
-);
+mongoose.connect(process.env.MONGODB_URI);
 console.log("Database Connected");
 
 const User = mongoose.model("User", {
